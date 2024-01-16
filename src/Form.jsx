@@ -1,5 +1,4 @@
 import Option from "./Option";
-import { useState } from "react";
 
 function Form({ listOptions }) {
   return (

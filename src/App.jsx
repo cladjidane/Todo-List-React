@@ -1,16 +1,17 @@
 import "./App.css";
-import Title from './Title'
+
+import { listOptionsData, listTasksData } from './utils/helpers';
+
 import Form from './Form'
 import Tasks from './Tasks'
-
-import { listTasksData, listOptionsData } from './utils/helpers';
+import Title from './Title'
 
 function App() {
   return (
     <>
       <Title />
       <Form listOptions={listOptionsData} />
-      <Tasks listTasksData={listTasksData}/>
+      <Tasks listTasksData={listTasksData} />
     </>
   );
 }
