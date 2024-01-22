@@ -123,3 +123,9 @@ form button {
   padding: 10px;
   font-size: 15px;
 }
+
+.notice {
+  padding: 20px;
+  background-color: red;
+  color: white;
+}
