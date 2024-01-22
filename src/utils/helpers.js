@@ -1,7 +1,7 @@
 export const listTasksData = [
-  {taskName: 'Tâche 1'},
-  {taskName: 'Tâche 2'},
-  {taskName: 'Tâche 3'}
+  {id:1, taskName: 'Tâche 1'},
+  {id:2, taskName: 'Tâche 2'},
+  {id:3, taskName: 'Tâche 3'}
 ]
 
 export const listOptionsData = [

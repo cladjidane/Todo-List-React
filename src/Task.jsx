@@ -1,9 +1,9 @@
-function Task({taskName}) {
+function Task({item}) {
   return (
     <li>
-      <input type="checkbox" />
-      <span>{taskName}</span>
-      <button>X</button>
+      <input defaultChecked={item.completed} type="checkbox" />
+      <span>[{item.id}] {item.todo}</span>
+      { !item.completed && <button>X</button>}
     </li>
   );
 }
