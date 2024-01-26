@@ -126,6 +126,7 @@ form button {
 
 .notice {
   padding: 20px;
-  background-color: red;
+  background-color: gray;
   color: white;
+  margin-bottom: 20px;
 }
