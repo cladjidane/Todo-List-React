@@ -21,8 +21,8 @@ function App() {
   return (
     <>
       <Title />
-      <Form user={defaultUser} />
-      {listTasksData.length > 0 &&  <Tasks listTasksData={listTasksData} />}
+      <Form user={defaultUser} listTasksData={listTasksData} setListTasksData={setListTasksData} />
+      {listTasksData.length > 0 &&  <Tasks setListTasksData={setListTasksData} listTasksData={listTasksData} />}
     </>
   );
 }
