@@ -13,21 +13,22 @@ function Form({preselectTasksData, setListTasksData, listTasksData}) {
   // Gestion de la soumission du formulaire
   const handleSubmit = (e) => {
     e.preventDefault(); // Important - Empêche le comportement par défaut du formulaire
+
+    var formdata = new FormData();
+    formdata.append("todo", taskName);
+    formdata.append("completed", "0");
+
     // Appel API pour ajouter une nouvelle tâche
-    fetch('https://dummyjson.com/todos/add', {
+    fetch('http://ds-react-2024.server/api/task/add', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        todo: taskName, // Nom de la tâche à ajouter, il s'agit de la variable d'état qui est mise à jour par le input 
-        completed: false, // Par défaut, la tâche n'est pas complétée
-        userId: 1, // Attribue la tâche à l'utilisateur courant (1 par défaut)
-      })
+      body: formdata
     })
     .then(res => res.json())
     .then(res => {
       // Mise à jour de la liste des tâches avec la nouvelle tâche
       // "res" est en premier pour le faire apparaître tout en haut de la liste
       setListTasksData([res, ...listTasksData]);
+      setListTasksData(res);
       setMessage('Tâche ajoutée !'); // Affiche un message de confirmation
     });
   }

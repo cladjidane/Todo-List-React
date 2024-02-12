@@ -13,13 +13,13 @@ function App() {
 
   // Charger les tâches depuis l'API
   const loadTasks = () => {
-    fetch("https://dummyjson.com/todos")
-      .then(response => response.json())
-      .then(data => {
-        setListTasksData(data.todos);
-        setPreselectTasksData(data.todos.filter(task => task.completed));
+    fetch("http://ds-react-2024.server/api/listetask")
+      .then((response) => response.json())
+      .then((data) => {
+        setListTasksData(data);
+        //setPreselectTasksData(data.filter(task => task.completed === 1));
       })
-      .catch(error => console.error("Failed to load tasks", error));
+      .catch((error) => console.error("Failed to load tasks", error));
   };
 
   // Le hook useEffect est utilisé ici pour charger les données lors du montage du composant.
@@ -31,29 +31,23 @@ function App() {
 
   // Mettre à jour une tâche
   const handleUpdate = (idTodo, completed) => {
-    fetch(`https://dummyjson.com/todos/${idTodo}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ completed })
-    })
-    .then(response => response.json())
-    .then(updatedTask => {
-      const updatedListTasks = listTasksData.map(task => 
-        task.id === idTodo ? updatedTask : task
-      );
-      setListTasksData(updatedListTasks);
-    })
-    .catch(error => console.error("Failed to update task", error));
-  };
+    let formdata = new FormData();
+    formdata.append("task_id", idTodo);
+    formdata.append("completed", completed ? "1" : "0");
 
-  // Supprimer une tâche
-  const handleDelete = (idTodo) => {
-    fetch(`https://dummyjson.com/todos/${idTodo}`, { method: "DELETE" })
-      .then(() => {
-        const updatedListTasks = listTasksData.filter(task => task.id !== idTodo);
-        setListTasksData(updatedListTasks);
+    fetch(`http://ds-react-2024.server/api/task/edit`, {
+      method: "POST",
+      body: formdata,
+    })
+      .then((response) => response.json())
+      .then((updatedTask) => {
+        // const updatedListTasks = listTasksData.map((task) =>
+        //   task.id === idTodo ? updatedTask : task
+        // );
+        console.log(updatedTask)
+        setListTasksData(updatedTask);
       })
-      .catch(error => console.error("Failed to delete task", error));
+      .catch((error) => console.error("Failed to update task", error));
   };
 
   return (
@@ -65,11 +59,7 @@ function App() {
         setListTasksData={setListTasksData}
       />
       {listTasksData.length > 0 && (
-        <Tasks
-          listTasksData={listTasksData}
-          handleUpdate={handleUpdate}
-          handleDelete={handleDelete}
-        />
+        <Tasks listTasksData={listTasksData} handleUpdate={handleUpdate} />
       )}
     </>
   );

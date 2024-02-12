@@ -1,7 +1,7 @@
 // Importation du composant Task pour l'affichage individuel de chaque tâche
 import Task from "./Task";
 
-function Tasks({ listTasksData, handleUpdate, handleDelete }) {
+function Tasks({ listTasksData, handleUpdate }) {
   // Rendu du composant Tasks
   return (
     <ul className="list-todo">
@@ -9,7 +9,6 @@ function Tasks({ listTasksData, handleUpdate, handleDelete }) {
         <Task
           key={`task-${index}`}
           handleUpdate={handleUpdate}
-          handleDelete={handleDelete}
           item={item}
         />
       ))}
