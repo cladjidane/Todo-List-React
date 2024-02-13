@@ -5,6 +5,7 @@ function Task({ item, handleUpdate }) {
   // Affiche le nom de la tâche
   // La fonction handleUpdate est à retrouver dans App.jsx
   // Elle a été transmise ici par Tasks en tant que props
+  // e.target.checked valant true ou false selon son état
   return (
     <li>
       <input 

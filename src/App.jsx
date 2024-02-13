@@ -9,17 +9,11 @@ import Title from "./Title";
 function App() {
   // Liste des tâches, sera remplie par l'appel API loadTasks() via l'effet declenché au montage du composant (useEffet())
   const [listTasksData, setListTasksData] = useState([]);
-  const [preselectTasksData, setPreselectTasksData] = useState([]);
 
   // Charger les tâches depuis l'API
   const loadTasks = () => {
-    fetch("http://ds-react-2024.server/api/listetask")
-      .then((response) => response.json())
-      .then((data) => {
-        setListTasksData(data);
-        //setPreselectTasksData(data.filter(task => task.completed === 1));
-      })
-      .catch((error) => console.error("Failed to load tasks", error));
+    // TODO fetch
+    return []
   };
 
   // Le hook useEffect est utilisé ici pour charger les données lors du montage du composant.
@@ -41,11 +35,7 @@ function App() {
     })
       .then((response) => response.json())
       .then((updatedTask) => {
-        // const updatedListTasks = listTasksData.map((task) =>
-        //   task.id === idTodo ? updatedTask : task
-        // );
-        console.log(updatedTask)
-        setListTasksData(updatedTask);
+        // TODO
       })
       .catch((error) => console.error("Failed to update task", error));
   };
@@ -54,7 +44,6 @@ function App() {
     <>
       <Title />
       <Form
-        preselectTasksData={preselectTasksData}
         listTasksData={listTasksData}
         setListTasksData={setListTasksData}
       />

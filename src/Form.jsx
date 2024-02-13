@@ -3,7 +3,10 @@ import Option from "./Option";
 // Importation du hook useState pour gérer l'état local du composant
 import { useState } from "react";
 
-function Form({preselectTasksData, setListTasksData, listTasksData}) {
+function Form({setListTasksData, listTasksData}) {
+  // TODO récupérer les tâches les plus courantes
+  const [preselectTasksData, setPreselectTasksData] = useState([]);
+
   // message pour afficher des retours à l'utilisateur après des actions spécifiques
   const [message, setMessage] = useState(null);
 
