@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { listOptionsData, listTasksData } from './utils/helpers';
+import { listOptionsData, listTasksData } from './utils/helpers'
 
 import Form from './Form'
 import Tasks from './Tasks'
@@ -17,3 +17,5 @@ function App() {
 }
 
 export default App;
+
+
