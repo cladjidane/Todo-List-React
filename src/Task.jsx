@@ -10,7 +10,7 @@ function Task({ item, handleUpdate }) {
       <input 
         checked={item.completed === 1 ? true : false} 
         type="checkbox" 
-        onChange={(e) => handleUpdate(item.id, e.target.checked)} 
+        onChange={(e) => handleUpdate(item.id, e.target.checked, item.todo)} 
       />
       <span>[{item.id}] {item.todo}</span>
     </li>

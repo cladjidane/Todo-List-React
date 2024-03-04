@@ -13,7 +13,7 @@ function App() {
 
   // Charger les tâches depuis l'API
   const loadTasks = () => {
-    fetch("http://ds-react-2024.server/api/listetask")
+    fetch("http://ds-react-2024.server/api/listetaskuser/123")
       .then((response) => response.json())
       .then((data) => {
         setListTasksData(data);
@@ -30,10 +30,11 @@ function App() {
   }, []);
 
   // Mettre à jour une tâche
-  const handleUpdate = (idTodo, completed) => {
+  const handleUpdate = (idTodo, completed, todo) => {
     let formdata = new FormData();
     formdata.append("task_id", idTodo);
     formdata.append("completed", completed ? "1" : "0");
+    formdata.append("todo", todo);
 
     fetch(`http://ds-react-2024.server/api/task/edit`, {
       method: "POST",
