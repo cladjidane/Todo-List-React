@@ -4,18 +4,11 @@ export const TodoContext = createContext();
 
 export const TodoProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
-
-  const loadTasks = () => {
+  
+  useEffect(() => {
     fetch("https://dummyjson.com/todos")
       .then((response) => response.json())
-      .then((data) => {
-        setTodos(data.todos);
-      })
-      .catch((error) => console.error("Failed to load tasks", error));
-  };
-
-  useEffect(() => {
-    loadTasks();
+      .then((data) => setTodos(data.todos))
   }, []);
 
   const addTodo = (todo) => {
@@ -25,31 +18,26 @@ export const TodoProvider = ({ children }) => {
       body: JSON.stringify(todo)
     })
     .then(res => res.json())
-    .then(loadTasks);
+    .then(/* load tasks updated */);
   };
 
   const removeTodo = (todoId) => {
-    fetch(`https://dummyjson.com/todos/${todoId}`, {
-      method: 'DELETE',
-    })
+    fetch(`https://dummyjson.com/todos/${todoId}`, { method: 'DELETE' })
     .then(res => res.json())
-    .then(res => setTodos(res));
+    .then(/* load tasks updated */);
   };
 
   const updateTodo = (todoId, status) => {
     fetch(`https://dummyjson.com/todos/${todoId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        completed: status,
-      })
+      body: JSON.stringify({ completed: status })
     })
     .then(res => res.json())
-    .then(res => setTodos(res));
-            
+    .then(/* load tasks updated */);
   };
 
   const value = { todos, addTodo, removeTodo, updateTodo };
-
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 };
+

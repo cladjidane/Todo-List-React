@@ -1,6 +1,4 @@
-// Composant Title pour afficher le titre de l'application
 function Title() {
-  // Rendu des titres de l'application
   return (
     <>
       <h1>Todo List CIR3</h1>
