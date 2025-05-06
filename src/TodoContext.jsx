@@ -24,7 +24,9 @@ export const TodoProvider = ({ children }) => {
   const removeTodo = (todoId) => {
     fetch(`https://dummyjson.com/todos/${todoId}`, { method: 'DELETE' })
     .then(res => res.json())
-    .then(/* load tasks updated */);
+    .then(_data => {
+      setTodos(prevTodos => prevTodos.filter(todo => todo.id !== todoId));
+    });
   };
 
   const updateTodo = (todoId, status) => {

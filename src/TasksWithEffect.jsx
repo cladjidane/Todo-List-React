@@ -2,29 +2,22 @@ import Task from "./Task";
 import { TodoContext } from "./TodoContext";
 import { useContext, useState, useEffect } from "react";
 
-function useSearchFilter(items, searchTerm) {
-  const [filteredItems, setFilteredItems] = useState(items);
-
-  useEffect(() => {
-    if (!searchTerm.trim()) {
-      setFilteredItems(items);
-    } else {
-      const lowercasedTerm = searchTerm.toLowerCase();
-      const filtered = items.filter(item => 
-        item.todo.toLowerCase().includes(lowercasedTerm)
-      );
-      setFilteredItems(filtered);
-    }
-  }, [items, searchTerm]);
-
-  return filteredItems;
-}
-
-function Tasks() {  
+function TasksWithEffect() {  
   const { todos } = useContext(TodoContext);
   const [searchTerm, setSearchTerm] = useState("");
+  const [filteredTodos, setFilteredTodos] = useState([]);
   
-  const filteredTodos = useSearchFilter(todos, searchTerm);
+  useEffect(() => {
+    if (!searchTerm.trim()) {
+      setFilteredTodos(todos);
+    } else {
+      const lowercasedTerm = searchTerm.toLowerCase();
+      const filtered = todos.filter(item => 
+        item.todo.toLowerCase().includes(lowercasedTerm)
+      );
+      setFilteredTodos(filtered);
+    }
+  }, [todos, searchTerm]);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -65,4 +58,4 @@ function Tasks() {
   );
 }
 
-export default Tasks;
+export default TasksWithEffect;
